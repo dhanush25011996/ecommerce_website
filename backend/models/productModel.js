@@ -63,10 +63,8 @@ const productSchema = new mongoose.Schema({
   },
   reviews: [
     {
-      name: {
-        type: String,
-        required: true,
-      },
+      user: mongoose.Schema.Types.ObjectId,
+
       rating: {
         type: String,
         required: true,
@@ -86,6 +84,12 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-let schema = mongoose.model("Product", productSchema);
+try {
+  Product = mongoose.model("Product");
+} catch (error) {
+  Product = mongoose.model("Product", productSchema);
+}
 
-module.exports = schema;
+
+
+module.exports = Product;
